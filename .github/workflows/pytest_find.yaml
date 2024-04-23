@@ -1,7 +1,7 @@
 name: 🚀 Run Unit Tests
 
 on:
-  push:
+  pull:
     branches:
       - main
   workflow_dispatch:
