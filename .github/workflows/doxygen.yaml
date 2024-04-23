@@ -1,0 +1,37 @@
+name: Build and Auto-Tag
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: 🛠 Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen
+
+      - name: 📄 Generate Documentation
+        run: |
+          doxygen Doxyfile
+
+      - name: 📦 Upload Documentation as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: path/to/generated/docs
