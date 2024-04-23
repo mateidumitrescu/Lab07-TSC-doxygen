@@ -48,6 +48,7 @@ class Tree:
         Returns:
             Node: node with data
         """
+        
         if self.root is not None:
             return self._find(data, self.root)
         else:
